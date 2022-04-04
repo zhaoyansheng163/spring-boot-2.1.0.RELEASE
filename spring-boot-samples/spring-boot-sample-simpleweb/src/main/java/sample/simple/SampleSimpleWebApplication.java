@@ -24,7 +24,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SampleSimpleApplication implements CommandLineRunner {
+public class SampleSimpleWebApplication implements CommandLineRunner {
 
 	// Simple example shows how a command line spring application can execute an
 	// injected bean service. Also demonstrates how you can use @Value to inject
@@ -42,7 +42,7 @@ public class SampleSimpleApplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(SampleSimpleApplication.class, args);
+		SpringApplication.run(SampleSimpleWebApplication.class, args);
 	}
 
 }

@@ -27,7 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests for {@link SampleSimpleApplication}.
+ * Tests for {@link SampleSimpleWebApplication}.
  *
  * @author Dave Syer
  */
@@ -42,7 +42,7 @@ public class SpringTestSampleSimpleApplicationTests {
 	public void testContextLoads() {
 		assertThat(this.ctx).isNotNull();
 		assertThat(this.ctx.containsBean("helloWorldService")).isTrue();
-		assertThat(this.ctx.containsBean("sampleSimpleApplication")).isTrue();
+		assertThat(this.ctx.containsBean("sampleSimpleWebApplication")).isTrue();
 	}
 
 }
