@@ -81,6 +81,10 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.StandardServletEnvironment;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 /**
  * Class that can be used to bootstrap and launch a Spring application from a Java main
@@ -423,12 +427,21 @@ public class SpringApplication {
 		 * 同时，在调用`AbstractApplicationContext`的`refresh`方法时也会加载一些`bean`，这些加载的`bean`有什么不同？
 		 */
 		// TODO 只有在这一步才会打印剩下的bean，不是在prepareEnvironment加载的bean？？？
-		// System.out.println("=======================下面开始打印容器中所有的bean name=============================");
+		 System.out.println("=======================下面开始打印容器中所有的bean name [context.getBeanDefinitionNames()]=============================");
 		for (String name : definitionNames) {
-			// System.out.println(name);
+			 System.out.println(name);
 		}
-		// System.out.println("=======================打印容器中所有的bean name结束=============================");
+		System.out.println("=======================打印容器中所有的bean name结束=============================");
 
+		System.out.println("=======================打印mvc容器开始===context.getBean(RequestMappingHandlerMapping.class)==========================");
+		RequestMappingHandlerMapping bean = context.getBean(RequestMappingHandlerMapping.class);
+		Map<RequestMappingInfo, HandlerMethod> handlerMethods = bean.getHandlerMethods();
+		for (RequestMappingInfo rmi : handlerMethods.keySet()) {
+			PatternsRequestCondition pc = rmi.getPatternsCondition();
+			Set<String> pSet = pc.getPatterns();
+			System.out.println("url:"+ pSet.toString() + " || method:" + rmi.getMethodsCondition().getMethods().toString() + " \n bean:" + handlerMethods.get(rmi));
+		}
+		System.out.println("=======================打印mvc容器结束=============================");
 
 		// 【11】最终返回容器
 		return context;
